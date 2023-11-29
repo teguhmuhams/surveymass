@@ -1,54 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <title>Sign In</title>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-    crossorigin="anonymous"></script>
-  <!-- <link rel="stylesheet" href="style.css" /> -->
-  <style>
-    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
-  </style>
-</head>
-
-<body>
-
-  <div class="container text-center">
-    <div class="row" id="Login">
-      <div class="col" id="gambar">
-        <img src="login.png" alt="" />
-      </div>
-      <div class="col" id="login">
-        <form id="login">
-          <h1>Login</h1>
-          <p>Use your SurveyMass account</p>
-          <div class="mb-3">
-            <input type="email" class="form-control" id="inputEmail" placeholder="Email" aria-describedby="emailHelp" />
-          </div>
-          <div class="mb-3">
-            <input type="password" class="form-control" id="inputPassword" placeholder="Password" />
-          </div>
-          <button id="btn-login" type="submit" class="btn btn-primary">
-            Login
-          </button>
-          <p>Create account?<a href="signUp.html"> Sign Up</a></p>
-        </form>
-      </div>
+<div class="container text-center">
+  <div class="row" id="Login">
+    <div class="col" id="gambar">
+      <img src="/img/login.png" alt="" />
+    </div>
+    <div class="col" id="login">
+      <form id="login">
+        <h1>Login</h1>
+        <p>Use your SurveyMass account</p>
+        <div class="mb-3">
+          <input type="email" class="form-control" id="inputEmail" placeholder="Email" aria-describedby="emailHelp" />
+        </div>
+        <div class="mb-3">
+          <input type="password" class="form-control" id="inputPassword" placeholder="Password" />
+        </div>
+        <button id="btn-login" type="submit" class="btn btn-primary">
+          Login
+        </button>
+        <p>Create account?<a href="<?= $BASE . '?page=register' ?>">Sign Up</a></p>
+      </form>
     </div>
   </div>
-  
-
-</body>
-
-</html>
-
+</div>
 <style>
-  
   #Login {
     display: flex;
     justify-content: center;
@@ -61,7 +34,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width:50vw;
+    width: 50vw;
   }
 
   #gambar img {
@@ -102,7 +75,7 @@
     color: #1e1e1e;
   }
 
-    #login p {
+  #login p {
     margin-bottom: 1vw;
     font-family: "Inter";
     font-style: normal;
@@ -111,13 +84,15 @@
     line-height: 40px;
     color: #1e1e1e;
   }
-  #login a{
+
+  #login a {
     color: #536DFE;
   }
 
-   #login a:hover{
+  #login a:hover {
     color: #6f83f8;
   }
+
   #login img {
     width: 14%;
   }
@@ -138,11 +113,12 @@
   }
 
 
-  #login form #btn-signUp:hover{
+  #login form #btn-signUp:hover {
     background: #ffffff;
     color: #536DFE;
-    border:  1px solid #536DFE;
+    border: 1px solid #536DFE;
   }
+
   #login form #btn-signUp {
     margin: 0;
     background-color: #536DFE;
