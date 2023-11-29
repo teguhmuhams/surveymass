@@ -21,8 +21,16 @@ $BASE = 'http://localhost:8000/';
 
 <body>
     <?php
-    if (isset($_GET['page'])) {
-        include_once 'views/' . $_GET['page'] . '.php';
+    $page = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+    $page = trim($page, '/');
+
+    $allowedPages = ['login', 'register']; // List of allowed pages
+    $pageFile = 'views/' . $page . '.php';
+
+    if (in_array($page, $allowedPages) && file_exists($pageFile)) {
+        include_once $pageFile;
+    } else {
+        include_once 'views/404.php'; // Default or 404 page
     }
     ?>
 </body>
