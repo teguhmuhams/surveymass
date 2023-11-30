@@ -1,6 +1,4 @@
 <?php
-include_once 'bootstrap.php';
-
 // Get user input from form
 $email = $_POST['email'];
 $password = $_POST['password'];
