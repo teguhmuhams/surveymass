@@ -16,7 +16,7 @@
         <button id="btn-login" type="submit" class="btn btn-primary">
           Login
         </button>
-        <p>Create account?<a href="<?= BASE_URL . '?page=register' ?>">Sign Up</a></p>
+        <p>Create account?<a href="<?= BASE_URL . '/register' ?>">Sign Up</a></p>
       </form>
     </div>
   </div>

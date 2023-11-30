@@ -1,16 +1,16 @@
 <div class="container text-center">
   <div class="row" id="register">
     <div class="col" id="gambar">
-      <img src="../img/signUp.png" alt="" />
+      <img src="/img/signUp.png" alt="" />
     </div>
     <div class="col" id="signUp">
-      <form id="signUp">
+      <form method="post" action="">
         <h1>Sign Up</h1>
         <div class="mb-3">
-          <input type="text" class="form-control" id="inputName" placeholder="Fullname" aria-describedby="emailHelp" />
+          <input type="text" name="name" class="form-control" placeholder="Name" />
         </div>
-        <div class="mb-3">
-          <input type="text" class="form-control" id="inputId" placeholder="Username" aria-describedby="userNameHelp" />
+        <!-- <div class="mb-3">
+          <input type="text" class="form-control" placeholder="Username" aria-describedby="userNameHelp" />
         </div>
         <div class="mb-3">
           <select id="inputJenisKelamin" class="form-control">
@@ -18,17 +18,17 @@
             <option>Laki-Laki</option>
             <option>Perempuan</option>
           </select>
+        </div> -->
+        <div class="mb-3">
+          <input type="email" name="email" class="form-control" placeholder="Email" />
         </div>
         <div class="mb-3">
-          <input type="email" class="form-control" id="inputEmail" placeholder="Email" aria-describedby="emailHelp" />
-        </div>
-        <div class="mb-3">
-          <input type="password" class="form-control" id="inputPassword" placeholder="Password" />
+          <input type="password" name="password" class="form-control" placeholder="Password" />
         </div>
         <button id="btn-signUp" type="submit" class="btn btn-primary">
           Sign Up
         </button>
-        <p>Have an account? <a href="<?= BASE_URL . '?page=login' ?>">Login</a></p>
+        <p>Have an account? <a href="<?= BASE_URL . '/login' ?>">Login</a></p>
       </form>
     </div>
   </div>
