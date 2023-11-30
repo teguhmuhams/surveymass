@@ -1,9 +1,7 @@
 <?php
-
-$BASE = 'http://localhost:8000/';
+include_once 'actions/bootstrap.php';
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,16 +19,30 @@ $BASE = 'http://localhost:8000/';
 
 <body>
     <?php
-    $page = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-    $page = trim($page, '/');
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $action = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        $action = trim($action, '/');
 
-    $allowedPages = ['login', 'register']; // List of allowed pages
-    $pageFile = 'views/' . $page . '.php';
+        $allowedActions = ['login', 'register']; // List of allowed pages
+        $actionFile = 'actions/' . $action . '.php';
 
-    if (in_array($page, $allowedPages) && file_exists($pageFile)) {
-        include_once $pageFile;
+        if (in_array($action, $allowedActions) && file_exists($actionFile)) {
+            include_once $actionFile;
+        } else {
+            include_once 'views/404.php'; // Default or 404 page
+        }
     } else {
-        include_once 'views/404.php'; // Default or 404 page
+        $page = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        $page = trim($page, '/');
+
+        $allowedPages = ['login', 'register']; // List of allowed pages
+        $pageFile = 'views/' . $page . '.php';
+
+        if (in_array($page, $allowedPages) && file_exists($pageFile)) {
+            include_once $pageFile;
+        } else {
+            include_once 'views/404.php'; // Default or 404 page
+        }
     }
     ?>
 </body>

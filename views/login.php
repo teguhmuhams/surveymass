@@ -4,19 +4,19 @@
       <img src="/img/login.png" alt="" />
     </div>
     <div class="col" id="login">
-      <form id="login">
+      <form method="post" action="">
         <h1>Login</h1>
         <p>Use your SurveyMass account</p>
         <div class="mb-3">
-          <input type="email" class="form-control" id="inputEmail" placeholder="Email" aria-describedby="emailHelp" />
+          <input type="email" name="email" class="form-control" placeholder="Email" />
         </div>
         <div class="mb-3">
-          <input type="password" class="form-control" id="inputPassword" placeholder="Password" />
+          <input type="password" name="password" class="form-control" placeholder="Password" />
         </div>
         <button id="btn-login" type="submit" class="btn btn-primary">
           Login
         </button>
-        <p>Create account?<a href="<?= $BASE . '?page=register' ?>">Sign Up</a></p>
+        <p>Create account?<a href="<?= BASE_URL . '?page=register' ?>">Sign Up</a></p>
       </form>
     </div>
   </div>

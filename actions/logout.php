@@ -1,5 +1,4 @@
 <?php
-include_once 'bootstrap.php';
 
 // Unset all of the session variables.
 $_SESSION = array();

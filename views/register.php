@@ -28,7 +28,7 @@
         <button id="btn-signUp" type="submit" class="btn btn-primary">
           Sign Up
         </button>
-        <p>Have an account? <a href="<?= $BASE . '?page=login' ?>">Login</a></p>
+        <p>Have an account? <a href="<?= BASE_URL . '?page=login' ?>">Login</a></p>
       </form>
     </div>
   </div>

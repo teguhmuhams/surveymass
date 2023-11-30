@@ -1,5 +1,4 @@
 <?php
-include_once 'bootstrap.php';
 
 // Get user input from form
 $name = $_POST['name'];
