@@ -12,7 +12,9 @@ $checkQuery->execute();
 $result = $checkQuery->get_result();
 
 if ($result->num_rows > 0) {
-    echo "Email already exists";
+    $_SESSION['error_message'] = 'Registration failed. Email already registered.';
+    header('location: ' . BASE_URL . '/register');
+    exit;
 } else {
     // Email does not exist, proceed with registration
 
@@ -25,9 +27,12 @@ if ($result->num_rows > 0) {
 
     // Execute the query
     if ($insertQuery->execute()) {
-        echo "Registration successful";
+        header('Location: ' . BASE_URL . '/login');
+        exit;
     } else {
-        echo "Error: " . $insertQuery->error;
+        $_SESSION['error_message'] = 'Register failed: ' . $insertQuery->error;
+        header('location: ' . BASE_URL . '/register');
+        exit;
     }
 }
 

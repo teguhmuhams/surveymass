@@ -6,6 +6,11 @@
     <div class="col" id="signUp">
       <form method="post" action="">
         <h1>Sign Up</h1>
+        <?php if (isset($_SESSION['error_message'])) : ?>
+          <p class="text-danger"><?= $_SESSION['error_message'] ?></p>
+          <?php unset($_SESSION['error_message']);
+          ?>
+        <?php endif; ?>
         <div class="mb-3">
           <input type="text" name="name" class="form-control" placeholder="Name" />
         </div>

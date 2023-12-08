@@ -15,13 +15,19 @@ if ($result->num_rows > 0) {
 
     // Verify the password with the hashed password in the database
     if (password_verify($password, $user['password'])) {
-        echo "Login successful";
+        $_SESSION['user'] = $user;
+        header('Location: ', BASE_URL);
+        exit;
         // Start session, set session variables, etc.
     } else {
-        echo "Invalid password";
+        $_SESSION['error_message'] = 'Login failed. Invalid credentials.';
+        header('location: ' . BASE_URL . '/login');
+        exit;
     }
 } else {
-    echo "No user found with that email address";
+    $_SESSION['error_message'] = 'Login failed. Invalid credentials.';
+    header('location: ' . BASE_URL . '/login');
+    exit;
 }
 
 // Close the connection

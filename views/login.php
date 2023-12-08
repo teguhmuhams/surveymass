@@ -7,6 +7,11 @@
       <form method="post" action="">
         <h1>Login</h1>
         <p>Use your SurveyMass account</p>
+        <?php if (isset($_SESSION['error_message'])) : ?>
+          <p class="text-danger"><?= $_SESSION['error_message'] ?></p>
+          <?php unset($_SESSION['error_message']);
+          ?>
+        <?php endif; ?>
         <div class="mb-3">
           <input type="email" name="email" class="form-control" placeholder="Email" />
         </div>
@@ -113,13 +118,13 @@
   }
 
 
-  #login form #btn-signUp:hover {
+  #login form #btn-login:hover {
     background: #ffffff;
     color: #536DFE;
     border: 1px solid #536DFE;
   }
 
-  #login form #btn-signUp {
+  #login form #btn-login {
     margin: 0;
     background-color: #536DFE;
     width: 25vw;
