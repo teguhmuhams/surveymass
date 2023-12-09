@@ -20,7 +20,7 @@ if ($page == 'logout') {
     exit;
 }
 
-$no_login_required = ['login', 'view'];
+$no_login_required = ['login', 'view', 'register'];
 $guest = in_array($page, $no_login_required);
 
 if ($page == null) {
@@ -36,7 +36,7 @@ if (!isset($_SESSION['user']) && !$guest) {
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $allowedActions = ['login', 'register', 'create', 'view']; // List of allowed pages
+    $allowedActions = ['login', 'register', 'create', 'view']; // List of allowed actions
     $actionFile = 'actions/' . $page . '.php';
 
     if (in_array($page, $allowedActions) && file_exists($actionFile)) {
@@ -63,6 +63,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         body {
             background-color: #dce1ff;
             font-family: 'Inter', Sans-serif;
+        }
+
+        .btn-primary:hover {
+            background: #ffffff;
+            color: #536DFE;
+            border: 1px solid #536DFE;
+        }
+
+        .btn-primary {
+            background-color: #536DFE;
+            border: 1px solid #536DFE;
+            border-radius: 10px;
         }
     </style>
 </head>

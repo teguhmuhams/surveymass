@@ -6,11 +6,11 @@ $data = json_decode($json);
 
 // Set parameters and execute
 $form_id = $data->form_id;
-$answers = json_encode($data->answers); // Encode answers as JSON
+$responses = json_encode($data->responses); // Encode responses as JSON
 $user_id = 1;
 
-$stmt = $conn->prepare("INSERT INTO form_answers (answers, form_id, user_id) VALUES (?, ?, ?)");
-$stmt->bind_param("sii", $answers, $form_id, $user_id);
+$stmt = $conn->prepare("INSERT INTO form_responses (responses, form_id, user_id) VALUES (?, ?, ?)");
+$stmt->bind_param("sii", $responses, $form_id, $user_id);
 
 header('Content-Type: application/json');
 if ($stmt->execute()) {

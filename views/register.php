@@ -5,35 +5,28 @@
     </div>
     <div class="col" id="signUp">
       <form method="post" action="">
-        <h1>Sign Up</h1>
-        <?php if (isset($_SESSION['error_message'])) : ?>
-          <p class="text-danger"><?= $_SESSION['error_message'] ?></p>
-          <?php unset($_SESSION['error_message']);
-          ?>
-        <?php endif; ?>
-        <div class="mb-3">
-          <input type="text" name="name" class="form-control" placeholder="Name" />
+        <div class="container w-75">
+          <h1>Sign Up</h1>
+          <p>Create your SurveyMass account</p>
+          <?php if (isset($_SESSION['message'])) : ?>
+            <?= $_SESSION['message'] ?>
+            <?php unset($_SESSION['message']);
+            ?>
+          <?php endif; ?>
+          <div class="mb-3">
+            <input type="text" name="name" class="form-control" placeholder="Name" />
+          </div>
+          <div class="mb-3">
+            <input type="email" name="email" class="form-control" placeholder="Email" />
+          </div>
+          <div class="mb-3">
+            <input type="password" name="password" class="form-control" placeholder="Password" />
+          </div>
+          <button type="submit" class="btn btn-primary w-100">
+            Sign Up
+          </button>
+          <p>Have an account? <a href="<?= BASE_URL . '/login' ?>">Login</a></p>
         </div>
-        <!-- <div class="mb-3">
-          <input type="text" class="form-control" placeholder="Username" aria-describedby="userNameHelp" />
-        </div>
-        <div class="mb-3">
-          <select id="inputJenisKelamin" class="form-control">
-            <option selected>Jenis Kelamin</option>
-            <option>Laki-Laki</option>
-            <option>Perempuan</option>
-          </select>
-        </div> -->
-        <div class="mb-3">
-          <input type="email" name="email" class="form-control" placeholder="Email" />
-        </div>
-        <div class="mb-3">
-          <input type="password" name="password" class="form-control" placeholder="Password" />
-        </div>
-        <button id="btn-signUp" type="submit" class="btn btn-primary">
-          Sign Up
-        </button>
-        <p>Have an account? <a href="<?= BASE_URL . '/login' ?>">Login</a></p>
       </form>
     </div>
   </div>
@@ -73,7 +66,7 @@
     flex-direction: column;
     align-items: center;
     width: 35vw;
-    height: 80vh;
+    height: 60vh;
     border-radius: 10px;
   }
 
@@ -83,19 +76,14 @@
 
   #signUp h1 {
     margin-bottom: 1vw;
-    font-family: "Inter";
-    font-style: normal;
     font-weight: 700;
     font-size: 33px;
     line-height: 30px;
-
     color: #1e1e1e;
   }
 
   #signUp p {
     margin-bottom: 1vw;
-    font-family: "Inter";
-    font-style: normal;
     font-weight: 500;
     font-size: 14px;
     line-height: 40px;
@@ -121,32 +109,7 @@
     background: linear-gradient(0deg, #ffffff, #ffffff), #ffffff;
     border: 1px solid rgba(10, 10, 10, 0.1);
     border-radius: 10px;
-    width: 25vw;
-    font-family: "Inter";
-    font-style: normal;
-    font-weight: 400;
     font-size: 16px;
     color: rgba(30, 30, 30, 0.7);
-  }
-
-
-  #signUp form #btn-signUp:hover {
-    background: #ffffff;
-    color: #536DFE;
-    border: 1px solid #536DFE;
-  }
-
-  #signUp form #btn-signUp {
-    margin: 0;
-    background-color: #536DFE;
-    width: 25vw;
-    font-family: "Inter";
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    color: #ffffff;
-    background: linear-gradient(0deg, #536DFE, #536DFE), #536DFE;
-    border: 1px solid #bbbbbb;
-    border-radius: 10px;
   }
 </style>

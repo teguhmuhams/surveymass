@@ -12,7 +12,7 @@ $checkQuery->execute();
 $result = $checkQuery->get_result();
 
 if ($result->num_rows > 0) {
-    $_SESSION['error_message'] = 'Registration failed. Email already registered.';
+    $_SESSION['message'] = '<div class="alert alert-danger">Registration failed. Email already registered.</div>';
     header('location: ' . BASE_URL . '/register');
     exit;
 } else {
@@ -27,10 +27,11 @@ if ($result->num_rows > 0) {
 
     // Execute the query
     if ($insertQuery->execute()) {
+        $_SESSION['message'] = '<div class="alert alert-success">Registration success</div>';
         header('Location: ' . BASE_URL . '/login');
         exit;
     } else {
-        $_SESSION['error_message'] = 'Register failed: ' . $insertQuery->error;
+        $_SESSION['message'] = '<div class="alert alert-danger">Registration failed.' . $insertQuery->error . '</div>';
         header('location: ' . BASE_URL . '/register');
         exit;
     }

@@ -14,7 +14,13 @@ if ($stmt->execute()) {
 <div class="container mt-5">
     <div class="card">
         <div class="card-body">
-            <h3>Daftar survey</h3>
+            <h3>Survey Lists</h3>
+            <div class="my-3">
+                <?php if (isset($_SESSION['message'])) : ?>
+                    <?= $_SESSION['message'] ?>
+                    <?php unset($_SESSION['message']); ?>
+                <?php endif; ?>
+            </div>
             <div class="mt-3 row">
                 <?php if ($result->num_rows === 0) : ?>
                     <p class="lead">You have no forms.</p>

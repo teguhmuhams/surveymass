@@ -98,18 +98,18 @@ if ($stmt->execute()) {
         // Find all item inputs
         const items = document.getElementsByName('items[]');
 
-        // Create an array to hold the answers
-        var answers = [];
+        // Create an array to hold the responses
+        var responses = [];
 
         // Iterate over the NodeList and push the value of each input into the array
         for (var i = 0; i < items.length; i++) {
-            answers.push(items[i].value);
+            responses.push(items[i].value);
         }
 
         // Create a JSON object
         let formData = {
             form_id: <?= $data['id'] ?>,
-            answers: answers
+            responses: responses
         };
 
         console.log(formData);

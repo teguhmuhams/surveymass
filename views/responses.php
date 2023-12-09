@@ -4,7 +4,7 @@
 
 $form_id = isset($slug) ? $slug : null;
 
-$stmt = $conn->prepare("SELECT * FROM form_answers WHERE form_id = ?");
+$stmt = $conn->prepare("SELECT * FROM form_responses WHERE form_id = ?");
 $stmt->bind_param("i", $form_id);
 
 if ($stmt->execute()) {
@@ -53,7 +53,7 @@ if ($stmt->execute()) {
 
                                     <!-- Get each response data -->
                                     <script>
-                                        console.log(<?= $row['answers'] ?>);
+                                        console.log(<?= $row['responses'] ?>);
                                     </script>
                                     <!-- Bootstrap Modal -->
                                     <div class="modal fade" id="response<?= $row['id'] ?>" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
@@ -65,10 +65,10 @@ if ($stmt->execute()) {
                                                 </div>
                                                 <div class="modal-body">
                                                     <?php
-                                                    $answers = json_decode($row['answers']);
+                                                    $responses = json_decode($row['responses']);
 
-                                                    if ($answers) {
-                                                        foreach ($answers as $answer) {
+                                                    if ($responses) {
+                                                        foreach ($responses as $answer) {
                                                             echo '<input type="text" class="form-control mt-3 custom-disabled" disabled value="' . htmlspecialchars($answer) . '">';
                                                         }
                                                     }

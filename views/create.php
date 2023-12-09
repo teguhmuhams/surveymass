@@ -135,6 +135,7 @@
       let formData = {
         form_title: document.querySelector('input[name="form_title"]').value,
         form_desc: document.querySelector('input[name="form_desc"]').value,
+        slug: document.querySelector('input[name="slug"]').value,
         items: items
       };
 
@@ -145,6 +146,11 @@
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(formData)
+        })
+        .then(response => {
+          if (response.redirected) {
+            window.location.href = response.url;
+          }
         })
         .catch((error) => {
           document.getElementById('error-message').textContent = error;

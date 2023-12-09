@@ -20,12 +20,12 @@ if ($result->num_rows > 0) {
         exit;
         // Start session, set session variables, etc.
     } else {
-        $_SESSION['error_message'] = 'Login failed. Invalid credentials.';
+        $_SESSION['message'] = '<div class="alert alert-danger">Login failed. Invalid credentials.</div>';
         header('location: ' . BASE_URL . '/login');
         exit;
     }
 } else {
-    $_SESSION['error_message'] = 'Login failed. Invalid credentials.';
+    $_SESSION['message'] = '<div class="alert alert-danger">Login failed. Invalid credentials.</div>';
     header('location: ' . BASE_URL . '/login');
     exit;
 }
