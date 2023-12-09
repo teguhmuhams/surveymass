@@ -14,14 +14,14 @@
 
       <div id="form-content"></div>
 
-      <div class="row mt-3">
+      <div class="row justify-content-center mt-3">
         <div class="col-4">
           <button type="button" class="btn btn-primary w-100" id="add-text">
             <img src="/img/more.png">
-            Input Text
+            Input Field
           </button>
         </div>
-        <div class="col-4">
+        <!-- <div class="col-4">
           <button type="button" class="btn btn-primary w-100" id="add-option">
             <img src="/img/more.png">
             Input Option
@@ -32,7 +32,7 @@
             <img src="/img/more.png">
             Input File
           </button>
-        </div>
+        </div> -->
       </div>
       <button class="btn btn-success w-100 mt-4" type="submit">
         Submit
@@ -72,26 +72,26 @@
       formContent.insertAdjacentHTML('beforeend', newHtml);
     });
 
-    document.getElementById('add-file').addEventListener('click', function() {
-      var formContent = document.getElementById('form-content');
-      var newHtml = `
-      <div class="card mt-4">
-          <div class="card-body">
-            <div class="mb-3">
-            <input type="text" class="form-control mb-3" name="items[][title]" placeholder="Put your question" required>
-            <input type="hidden" name="items[][type]" value="file">
-            <input type="file" class="form-control" disabled>
-            </div>
-            <div class="d-flex justify-content-end">
-              <button class="btn btn-outline-danger" onclick="this.parentElement.parentElement.parentElement.remove();">
-                <i class="fas fa-trash"></i>
-              </button>
-            </div>
-          </div>
-      </div>          
-      `;
-      formContent.insertAdjacentHTML('beforeend', newHtml);
-    });
+    // document.getElementById('add-file').addEventListener('click', function() {
+    //   var formContent = document.getElementById('form-content');
+    //   var newHtml = `
+    //   <div class="card mt-4">
+    //       <div class="card-body">
+    //         <div class="mb-3">
+    //         <input type="text" class="form-control mb-3" name="items[][title]" placeholder="Put your question" required>
+    //         <input type="hidden" name="items[][type]" value="file">
+    //         <input type="file" class="form-control" disabled>
+    //         </div>
+    //         <div class="d-flex justify-content-end">
+    //           <button class="btn btn-outline-danger" onclick="this.parentElement.parentElement.parentElement.remove();">
+    //             <i class="fas fa-trash"></i>
+    //           </button>
+    //         </div>
+    //       </div>
+    //   </div>          
+    //   `;
+    //   formContent.insertAdjacentHTML('beforeend', newHtml);
+    // });
 
     // <div class="card">
     //     <div class="card-body">
