@@ -16,7 +16,7 @@ if ($result->num_rows > 0) {
     // Verify the password with the hashed password in the database
     if (password_verify($password, $user['password'])) {
         $_SESSION['user'] = $user;
-        header('Location: ', BASE_URL);
+        header('location: ' . BASE_URL . '/dashboard');
         exit;
         // Start session, set session variables, etc.
     } else {

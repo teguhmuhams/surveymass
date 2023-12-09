@@ -1,5 +1,6 @@
 <?php
 include_once 'actions/bootstrap.php';
+
 $urlPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $urlPath = trim($urlPath, '/');
 
@@ -9,6 +10,30 @@ $segments = explode('/', $urlPath);
 // Extract the page and optional slug
 $page = $segments[0] ?? null; // Assign the first segment to $page
 $slug = $segments[1] ?? null; // Assign the second segment to $slug, if it exists
+
+// Check if user wants to log out
+if ($page == 'logout') {
+    session_unset();
+    session_destroy();
+
+    header('location: ' . BASE_URL);
+    exit;
+}
+
+$no_login_required = ['login', 'view'];
+$guest = in_array($page, $no_login_required);
+
+if ($page == null) {
+    if (isset($_SESSION['user'])) {
+        header('location: ' . BASE_URL . '/dashboard');
+        return;
+    }
+}
+if (!isset($_SESSION['user']) && !$guest) {
+    header('location: ' . BASE_URL . '/login');
+    return;
+}
+
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $allowedActions = ['login', 'register', 'create', 'view']; // List of allowed pages
@@ -44,10 +69,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <body>
     <?php
-    $allowedPages = ['login', 'register', 'create', 'view']; // List of allowed pages
+    $allowedPages = ['login', 'register', 'create', 'view', 'dashboard', 'responses']; // List of allowed pages
     $pageFile = 'views/' . $page . '.php';
 
     if (in_array($page, $allowedPages) && file_exists($pageFile)) {
+        if ($page != 'login' && $page != 'register') {
+            include_once 'views/nav.php';
+        }
         include_once $pageFile;
     } else {
         include_once 'views/404.php'; // Default or 404 page
