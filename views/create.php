@@ -14,29 +14,35 @@
 
       <div id="form-content"></div>
 
-      <div class="row justify-content-center mt-3">
-        <div class="col-4">
-          <button type="button" class="btn btn-primary w-100" id="add-text">
-            <img src="/img/more.png">
-            Input Field
+      <div class="row justify-content-between mt-3">
+        <div class="col-3">
+          <button class="btn btn-primary w-100" type="submit">
+            Submit
           </button>
         </div>
-        <!-- <div class="col-4">
-          <button type="button" class="btn btn-primary w-100" id="add-option">
-            <img src="/img/more.png">
-            Input Option
-          </button>
+        <div class="col-7">
+          <div class="row justify-content-end">
+            <div class="col-3">
+              <button type="button" class="btn btn-outline-primary w-100" id="add-text">
+                <i class="fas fa-plus"></i>
+                Input Field
+              </button>
+            </div>
+            <div class="col-3">
+              <button type="button" class="btn btn-outline-primary w-100" id="add-option">
+                <i class="fas fa-plus"></i>
+                Input Option
+              </button>
+            </div>
+            <div class="col-3">
+              <button type="button" class="btn btn-outline-primary w-100" id="add-file">
+                <i class="fas fa-plus"></i>
+                Input File
+              </button>
+            </div>
+          </div>
         </div>
-        <div class="col-4">
-          <button type="button" class="btn btn-primary w-100" id="add-file">
-            <img src="/img/more.png">
-            Input File
-          </button>
-        </div> -->
       </div>
-      <button class="btn btn-success w-100 mt-4" type="submit">
-        Submit
-      </button>
     </form>
 
 

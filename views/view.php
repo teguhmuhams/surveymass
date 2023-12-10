@@ -18,7 +18,7 @@ if ($stmt->execute()) {
         <div class="card border-top">
             <div class="card-body m-3">
                 <h1 class="mb-4"><?= $data['title'] ?></h1>
-                <h5><?= $data['description'] ?></h5>
+                <p><?= $data['description'] ?></p>
             </div>
         </div>
 
@@ -35,7 +35,7 @@ if ($stmt->execute()) {
             <?php endforeach; ?>
         </div>
 
-        <button class="btn btn-success w-100 mt-4" type="submit">
+        <button class="btn btn-primary mt-4" type="submit">
             Submit
         </button>
     </form>
@@ -45,14 +45,14 @@ if ($stmt->execute()) {
 
     </div>
 
-    <div class="mt-5">
+    <div class="mt-3">
         <p class="opacity-75">Never submit passwords through Survey Mass.</p>
         <p class="opacity-75">This content is neither created nor endorsed by Survey Mass, Report Abuse - Term of Service - Private Policy</p>
     </div>
 
 </div>
 
-<footer class="mt-5">
+<footer class="my-3">
     <h2 class="text-center opacity-50">Survey Mass</h2>
 </footer>
 

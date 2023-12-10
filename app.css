@@ -1,0 +1,27 @@
+
+body {
+    background-color: #dce1ff;
+    font-family: 'Inter', Sans-serif;
+}
+
+.btn-primary:hover {
+    background: #3F3F9A;
+    border: 1px solid #3F3F9A;
+}
+
+.btn-primary {
+    background-color: #536DFE;
+    border: 1px solid #536DFE;
+    border-radius: 10px;
+}
+
+.btn-outline-primary {
+    background: #ffffff;
+    color: #1F3F9A;
+    border: 1px solid #1F3F9A;
+}
+
+.btn-outline-primary:hover {
+    background-color: #536DFE;
+    border: 1px solid #536DFE;
+}
