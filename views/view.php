@@ -7,14 +7,14 @@ $stmt->bind_param("s", $slug);
 if ($stmt->execute()) {
     $result = $stmt->get_result();
     $data = $result->fetch_assoc();
-
-    $items = json_decode($data['items']);
+    if ($data)
+        $items = json_decode($data['items']);
 }
 
 ?>
 
 <div class="container mt-5">
-    <form method="POST" action="">
+    <?php if ($data) : ?>
         <div class="card border-top">
             <div class="card-body m-3">
                 <h1 class="mb-4"><?= $data['title'] ?></h1>
@@ -22,24 +22,33 @@ if ($stmt->execute()) {
             </div>
         </div>
 
-        <div id="form-content">
-            <?php foreach ($items as $item) : ?>
-                <div class="card mt-4">
-                    <div class="card-body m-3">
-                        <div class="mb-3">
-                            <h3 class="mb-3"><?= $item->title ?></h3>
-                            <input type="text" class="form-control" name="items[]" placeholder="Short answer text">
+        <form method="POST" action="">
+            <div id="form-content">
+                <?php foreach ($items as $item) : ?>
+                    <div class="card mt-4">
+                        <div class="card-body m-3">
+                            <div class="mb-3">
+                                <h3 class="mb-3"><?= $item->title ?></h3>
+                                <input type="text" class="form-control" name="items[]" placeholder="Short answer text">
+                            </div>
                         </div>
                     </div>
-                </div>
-            <?php endforeach; ?>
+                <?php endforeach; ?>
+            </div>
+
+            <button class="btn btn-primary mt-4" type="submit">
+                Submit
+            </button>
+        </form>
+    <?php endif; ?>
+
+    <?php if (!$data) : ?>
+        <div class="card border-top">
+            <div class="card-body m-3 text-center">
+                <p class="lead">Survey is not found!</p>
+            </div>
         </div>
-
-        <button class="btn btn-primary mt-4" type="submit">
-            Submit
-        </button>
-    </form>
-
+    <?php endif; ?>
 
     <div id="error-message" class="text-danger my-3">
 

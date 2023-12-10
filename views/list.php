@@ -1,16 +1,15 @@
 <?php
 
 // get all survey data created by this user
-$user = $_SESSION['user'];
+if (isset($_SESSION['user']))
+    $user = $_SESSION['user'];
 
 $stmt = $conn->prepare("
     SELECT f.*, COUNT(fr.form_id) as total_responses
     FROM forms f
     LEFT JOIN form_responses fr ON f.id  = fr.form_id
-    WHERE f.user_id = ?
     GROUP BY f.id;
 ");
-$stmt->bind_param("i", $user['id']);
 
 if ($stmt->execute()) {
     $result = $stmt->get_result();
@@ -20,18 +19,13 @@ if ($stmt->execute()) {
 <div class="container mt-5">
     <div class="card">
         <div class="card-title bg-primary py-3">
-            <h1 class="text-center text-white">Your Survey</h1>
+            <h1 class="text-center text-white">All Survey</h1>
         </div>
         <div class="card-body">
-            <div class="my-3">
-                <?php if (isset($_SESSION['message'])) : ?>
-                    <?= $_SESSION['message'] ?>
-                    <?php unset($_SESSION['message']); ?>
-                <?php endif; ?>
-            </div>
+            <h3>Survey Lists</h3>
             <div class="mt-3 row">
                 <?php if ($result->num_rows === 0) : ?>
-                    <span class="lead">You have no forms.<a href="<?= BASE_URL . '/create' ?>">Create one!</a></span>
+                    <span class="lead">There are no survey yet!<a href="<?= BASE_URL . '/create' ?>">Create one!</a></span>
                 <?php else : ?>
                     <?php while ($row = $result->fetch_assoc()) : ?>
                         <div class="col-3">
@@ -55,14 +49,7 @@ if ($stmt->execute()) {
                                             <p class="fs-6 text-muted text-end">Created <?= date('M j, Y', strtotime($row['created_at'])); ?></p>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <a class="btn btn-outline-primary w-100" href="<?= BASE_URL . '/view/' . $row['slug'] ?>">Preview</a>
-                                        </div>
-                                        <div class="col-6">
-                                            <a class="btn btn-primary w-100" href="<?= BASE_URL . '/responses/' . $row['id'] ?>">Responses</a>
-                                        </div>
-                                    </div>
+                                    <a class="btn btn-outline-primary w-100" href="<?= BASE_URL . '/view/' . $row['slug'] ?>">View Survey</a>
                                 </div>
                             </div>
                         </div>
@@ -72,16 +59,3 @@ if ($stmt->execute()) {
         </div>
     </div>
 </div>
-<style>
-    .box {
-        display: none;
-        width: 100%;
-    }
-
-    a:hover+.box,
-    .box:hover {
-        display: block;
-        position: absolute;
-        z-index: 100;
-    }
-</style>

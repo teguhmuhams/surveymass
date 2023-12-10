@@ -45,7 +45,6 @@
       </div>
     </form>
 
-
     <div id="error-message" class="text-danger my-3">
     </div>
 
@@ -163,9 +162,3 @@
         });
     });
   </script>
-
-  <style>
-    .border-top {
-      border-top: 8px solid #536DFE !important;
-    }
-  </style>

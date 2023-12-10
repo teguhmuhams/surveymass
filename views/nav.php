@@ -14,6 +14,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="<?= BASE_URL . '/create' ?>">Create New Survey</a></li>
+                        <li><a class="dropdown-item" href="<?= BASE_URL . '/list' ?>">View list of Surveys</a></li>
                     </ul>
                 </li>
                 <?php if (isset($_SESSION['user'])) : ?>

@@ -25,3 +25,20 @@ body {
     background-color: #536DFE;
     border: 1px solid #536DFE;
 }
+
+.border-top {
+    border-top: 8px solid #536DFE !important;
+}
+
+.bg-primary {
+    background-color: #536DFE !important;
+}
+
+.text-primary {
+    color: #536DFE !important;
+}
+
+
+.card.survey-list:hover {
+    border: 1px solid #536DFE;
+}

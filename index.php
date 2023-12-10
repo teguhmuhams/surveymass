@@ -20,14 +20,16 @@ if ($page == 'logout') {
     exit;
 }
 
-$no_login_required = ['login', 'view', 'register'];
+$no_login_required = ['login', 'view', 'register', 'list'];
 $guest = in_array($page, $no_login_required);
 
 if ($page == null) {
     if (isset($_SESSION['user'])) {
         header('location: ' . BASE_URL . '/dashboard');
-        return;
+    } else {
+        header('location: ' . BASE_URL . '/list');
     }
+    return;
 }
 if (!isset($_SESSION['user']) && !$guest) {
     header('location: ' . BASE_URL . '/login');
@@ -63,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <body>
     <?php
-    $allowedPages = ['login', 'register', 'create', 'view', 'dashboard', 'responses']; // List of allowed pages
+    $allowedPages = ['login', 'register', 'create', 'view', 'dashboard', 'responses', 'list']; // List of allowed pages
     $pageFile = 'views/' . $page . '.php';
 
     if (in_array($page, $allowedPages) && file_exists($pageFile)) {
@@ -77,6 +79,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    </script>
 </body>
 
 </html>
