@@ -4,9 +4,9 @@
         <div class="card-body">
           <h1 class="mb-4">Create Your Form</h1>
           <div class="mb-3">
-            <input type="text" class="form-control mb-3" name="form_title" required placeholder="Form Title" autofocus>
-            <input type="text" class="form-control mb-3" name="form_desc" required placeholder="Form description">
-            <input type="text" class="form-control" name="slug" required placeholder="Form slug (eg: my-form)">
+            <input type="text" class="form-control mb-3" name="form_title" required placeholder="Form Title" value="test 1" autofocus>
+            <input type="text" class="form-control mb-3" name="form_desc" required placeholder="Form description" value="test 2">
+            <input type="text" class="form-control" name="slug" required placeholder="Form slug (eg: my-form)" value="test3">
           </div>
           <p class="required" style="font-size: 13px; color: red;">*Required</p>
         </div>
@@ -62,7 +62,7 @@
       <div class="card mt-4">
         <div class="card-body">
           <div class="mb-3">
-          <input type="text" class="form-control mb-3" name="items[][title]" placeholder="Put your question" required>
+          <input type="text" class="form-control mb-3" name="items[][title]" placeholder="Put your question" value="question" required>
           <input type="hidden" name="items[][type]" value="text">
             <input type="text" class="form-control" disabled placeholder="Short answer text">
           </div>
@@ -77,46 +77,48 @@
       formContent.insertAdjacentHTML('beforeend', newHtml);
     });
 
-    // document.getElementById('add-file').addEventListener('click', function() {
-    //   var formContent = document.getElementById('form-content');
-    //   var newHtml = `
-    //   <div class="card mt-4">
-    //       <div class="card-body">
-    //         <div class="mb-3">
-    //         <input type="text" class="form-control mb-3" name="items[][title]" placeholder="Put your question" required>
-    //         <input type="hidden" name="items[][type]" value="file">
-    //         <input type="file" class="form-control" disabled>
-    //         </div>
-    //         <div class="d-flex justify-content-end">
-    //           <button class="btn btn-outline-danger" onclick="this.parentElement.parentElement.parentElement.remove();">
-    //             <i class="fas fa-trash"></i>
-    //           </button>
-    //         </div>
-    //       </div>
-    //   </div>          
-    //   `;
-    //   formContent.insertAdjacentHTML('beforeend', newHtml);
-    // });
+    document.getElementById('add-file').addEventListener('click', function() {
+      var formContent = document.getElementById('form-content');
+      var newHtml = `
+      <div class="card mt-4">
+          <div class="card-body">
+            <div class="mb-3">
+            <input type="text" class="form-control mb-3" name="items[][title]" placeholder="Put your question" value="question" required>
+            <input type="hidden" name="items[][type]" value="file">
+            <input type="file" class="form-control" disabled>
+            </div>
+            <div class="d-flex justify-content-end">
+              <button class="btn btn-outline-danger" onclick="this.parentElement.parentElement.parentElement.remove();">
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
+          </div>
+      </div>          
+      `;
+      formContent.insertAdjacentHTML('beforeend', newHtml);
+    });
 
-    // <div class="card">
-    //     <div class="card-body">
-    //       <div class="mb-3">
-    //         <input type="text" class="form-control" id="question" placeholder="Put your question">
-    //         <div class="form-check">
-    //           <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-    //           <label class="form-check-label" for="flexRadioDefault1">
-    //             Hayo
-    //           </label>
-    //         </div>
-    //         <div class="form-check">
-    //           <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-    //           <label class="form-check-label" for="flexRadioDefault2">
-    //             Hayoo
-    //           </label>
-    //         </div>
-    //       </div>
-    //     </div>
-    //   </div>
+    document.getElementById('add-option').addEventListener('click', function() {
+      var formContent = document.getElementById('form-content');
+      var newHtml = `
+      <div class="card mt-4">
+          <div class="card-body">
+            <div class="mb-3">
+            <input type="text" class="form-control mb-3" name="items[][title]" placeholder="Put your question" value="question" required>
+            <input type="hidden" name="items[][type]" value="option">
+            </div>
+            <div class="d-flex justify-content-end">
+              <button class="btn btn-outline-danger" onclick="this.parentElement.parentElement.parentElement.remove();">
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
+          </div>
+      </div>          
+      `;
+      formContent.insertAdjacentHTML('beforeend', newHtml);
+    });
+
+
 
     document.querySelector('form').addEventListener('submit', function(e) {
       // Prevent the default form submission
