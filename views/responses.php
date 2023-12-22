@@ -1,14 +1,22 @@
 <?php
 
 // get all survey data created by this user
-
 $form_id = isset($slug) ? $slug : null;
 
 $stmt = $conn->prepare("SELECT * FROM form_responses WHERE form_id = ?");
 $stmt->bind_param("i", $form_id);
 
 if ($stmt->execute()) {
-    $result = $stmt->get_result();
+    $formResponses = $stmt->get_result();
+}
+
+$stmt = $conn->prepare("SELECT * FROM forms WHERE id = ?");
+$stmt->bind_param("i", $form_id);
+
+if ($stmt->execute()) {
+    $formData = $stmt->get_result();
+    $formData = $formData->fetch_assoc();
+    $formItems = json_decode($formData['items']);
 }
 
 ?>
@@ -20,16 +28,19 @@ if ($stmt->execute()) {
                     <h3>Form responses</h3>
                 </div>
                 <div>
-                    <button class="btn btn-danger">Delete this form</button>
+                    <form action="" method="post">
+                        <input type="hidden" name="form_id" value="<?= $form_id ?>">
+                        <button type="submit" class="btn btn-danger">Delete this form</button>
+                    </form>
                 </div>
             </div>
 
             <div class="mt-3 row">
-                <?php if ($result->num_rows === 0) : ?>
+                <?php if ($formResponses->num_rows === 0) : ?>
                     <span class="lead">This form has no response. <a href="<?= BASE_URL . '/dashboard' ?>">Back to dashboard</a></span>
                 <?php else : ?>
                     <div class="container">
-                        <p class="lead">Total responses: <?= $result->num_rows ?></p>
+                        <p class="lead">Total responses: <?= $formResponses->num_rows ?></p>
                         <table class="table table-striped">
                             <thead>
                                 <tr>
@@ -40,7 +51,7 @@ if ($stmt->execute()) {
                             </thead>
                             <tbody>
                                 <?php $count = 0; ?>
-                                <?php while ($row = $result->fetch_assoc()) : ?>
+                                <?php while ($row = $formResponses->fetch_assoc()) : ?>
                                     <tr>
                                         <th scope="row"><?= ++$count ?></th>
                                         <td><?= $row['created_at'] ?></td>
@@ -51,10 +62,6 @@ if ($stmt->execute()) {
                                         </td>
                                     </tr>
 
-                                    <!-- Get each response data -->
-                                    <script>
-                                        console.log(<?= $row['responses'] ?>);
-                                    </script>
                                     <!-- Bootstrap Modal -->
                                     <div class="modal fade" id="response<?= $row['id'] ?>" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
@@ -67,16 +74,19 @@ if ($stmt->execute()) {
                                                     <?php
                                                     $responses = json_decode($row['responses']);
 
-                                                    if ($responses) {
-                                                        foreach ($responses as $answer) {
-                                                            echo '<input type="text" class="form-control mt-3 custom-disabled" disabled value="' . htmlspecialchars($answer) . '">';
-                                                        }
-                                                    }
+                                                    if ($responses) :
+                                                        $index = 0;
+                                                        foreach ($responses as $answer) :
                                                     ?>
+                                                            <div class="mb-3">
+                                                                <label class="form-label"> <?= $formItems[$index++]->title ?></label>
+                                                                <input type="text" class="form-control custom-disabled" disabled value="<?= htmlspecialchars($answer) ?>">
+                                                            </div>
+                                                        <?php endforeach; ?>
+                                                    <?php endif; ?>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                    <button type="button" class="btn btn-primary">Save changes</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -94,11 +104,11 @@ if ($stmt->execute()) {
 <style>
     .custom-disabled {
         /* Override the default disabled field styling here */
-        opacity: 1;
+        opacity: 1 !important;
         /* Reset the opacity */
-        background-color: white;
+        background-color: white !important;
         /* Set your desired background color */
-        color: black;
+        color: black !important;
         /* Set your desired text color */
     }
 
@@ -108,3 +118,23 @@ if ($stmt->execute()) {
     }
 </style>
 <script src="https://code.jquery.com/jquery-3.7.1.slim.js" integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
+<script>
+    document.querySelector('form').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent form from submitting immediately
+        var form = this; // 'this' refers to the form
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Do you really want to delete this form?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.value) {
+                form.submit(); // Submit the form if confirmed
+            }
+        });
+    });
+</script>

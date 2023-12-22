@@ -11,11 +11,31 @@ $items = json_encode($data->items); // Encode items as JSON
 $user_id = $_SESSION['user']['id'];
 $slug = $data->slug;
 
-$stmt = $conn->prepare("INSERT INTO forms (slug, user_id, title, description, items) VALUES (?, ?, ?, ?, ?)");
-$stmt->bind_param("sisss", $slug, $user_id, $title, $description, $items);
+header('Content-Type: application/json');
 
-if ($stmt->execute()) {
-    $_SESSION['message'] = '<div class="alert alert-success">Form created successfully</div>';
-    header('Location: ' . BASE_URL . '/dashboard');
+try {
+    $stmt = $conn->prepare("INSERT INTO forms (slug, user_id, title, description, items) VALUES (?, ?, ?, ?, ?)");
+    $stmt->bind_param("sisss", $slug, $user_id, $title, $description, $items);
+
+    if ($stmt->execute()) {
+        $response = array(
+            "status" => "success",
+            "message" => "Data received!"
+        );
+    } else {
+        // If the statement execution fails, it will go here.
+        $response = array(
+            "status" => "failed",
+            "message" => "Unable to perform your requests."
+        );
+    }
+
+    $stmt->close();
+} catch (Exception $e) {
+    $response = array(
+        "status" => "error",
+        "message" => "Error: " . $e->getMessage(),
+    );
 }
-$stmt->close();
+
+echo json_encode($response);

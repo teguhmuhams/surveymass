@@ -32,13 +32,14 @@ if ($page == null) {
     return;
 }
 if (!isset($_SESSION['user']) && !$guest) {
+    $_SESSION['message'] = '<div class="alert alert-info">Please sign in to continue.</div>';
     header('location: ' . BASE_URL . '/login');
     return;
 }
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $allowedActions = ['login', 'register', 'create', 'view']; // List of allowed actions
+    $allowedActions = ['login', 'register', 'create', 'view', 'responses']; // List of allowed actions
     $actionFile = 'actions/' . $page . '.php';
 
     if (in_array($page, $allowedActions) && file_exists($actionFile)) {
@@ -61,11 +62,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <style>
         @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
     <?php
-    $allowedPages = ['login', 'register', 'create', 'view', 'dashboard', 'responses', 'list']; // List of allowed pages
+    $allowedPages = ['login', 'register', 'create', 'view', 'preview', 'dashboard', 'responses', 'list']; // List of allowed pages
     $pageFile = 'views/' . $page . '.php';
 
     if (in_array($page, $allowedPages) && file_exists($pageFile)) {

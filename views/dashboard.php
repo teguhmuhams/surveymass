@@ -23,6 +23,7 @@ if ($stmt->execute()) {
             <h1 class="text-center text-white">Your Survey</h1>
         </div>
         <div class="card-body">
+            <a class="btn btn-primary" href="<?= BASE_URL . '/create' ?>">Create Survey</a>
             <div class="my-3">
                 <?php if (isset($_SESSION['message'])) : ?>
                     <?= $_SESSION['message'] ?>
@@ -31,7 +32,7 @@ if ($stmt->execute()) {
             </div>
             <div class="mt-3 row justify-content-sm-center justify-content-md-start">
                 <?php if ($result->num_rows === 0) : ?>
-                    <span class="lead">You have no forms.<a href="<?= BASE_URL . '/create' ?>">Create one!</a></span>
+                    <span class="lead">You have no survey.</span>
                 <?php else : ?>
                     <?php while ($row = $result->fetch_assoc()) : ?>
                         <div class="col-sm-10 col-md-6 col-lg-3">
@@ -57,7 +58,7 @@ if ($stmt->execute()) {
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12 col-lg-6 mb-3">
-                                            <a class="btn btn-outline-primary w-100" href="<?= BASE_URL . '/view/' . $row['slug'] ?>">Preview</a>
+                                            <a class="btn btn-outline-primary w-100" href="<?= BASE_URL . '/preview/' . $row['slug'] ?>">Preview</a>
                                         </div>
                                         <div class="col-md-12 col-lg-6">
                                             <a class="btn btn-primary w-100" href="<?= BASE_URL . '/responses/' . $row['id'] ?>">Responses</a>

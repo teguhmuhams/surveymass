@@ -25,7 +25,7 @@ if ($stmt->execute()) {
             <h3>Survey Lists</h3>
             <div class="mt-3 row">
                 <?php if ($result->num_rows === 0) : ?>
-                    <span class="lead">There are no survey yet!<a href="<?= BASE_URL . '/create' ?>">Create one!</a></span>
+                    <span class="lead">There are no survey yet! <a href="<?= BASE_URL . '/create' ?>">Create one!</a></span>
                 <?php else : ?>
                     <?php while ($row = $result->fetch_assoc()) : ?>
                         <div class="col-3">
